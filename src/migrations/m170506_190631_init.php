@@ -25,7 +25,7 @@ class m170506_190631_init extends Migration
             'organization_to_id' => Schema::TYPE_INTEGER . ' UNSIGNED NOT NULL'
         ]);
 
-        $this->createIndex('PRIMARY', 'organization_relation', [
+        $this->createIndex('organization_relation__PK', 'organization_relation', [
             'organization_from_id',
             'organization_to_id'
         ], true);
