@@ -2,7 +2,7 @@ FROM php:7-apache
 
 RUN apt-get update \
   && apt-get install -y libmcrypt-dev netcat \
-  && docker-php-ext-install pdo_mysql mysqli mbstring gd iconv mcrypt opcache \
+  && docker-php-ext-install pdo_mysql mysqli mbstring iconv mcrypt opcache \
   && a2enmod rewrite
 
 COPY docker/run.sh /run.sh
