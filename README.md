@@ -1,3 +1,18 @@
+ORGANIZATION REST API
+===
+
+Requirements
+---
+* PHP and Composer installed locally
+* Docker if you want to run app in docker container or apache if locally
+
+Installing
+---
+```bash
+$ git clone https://github.com/ilves/organization.git
+$ cd organization
+```
+
 Building
 ---
 ```bash
@@ -7,10 +22,12 @@ $ composer install
 
 Running tests locally:
 ---
-Edit src/config/db-test.php to set test database params.
+Edit src/config/db-test.php to set test database params. Also create database
+that is defined in db-test.php file as migration scripts do not include database
+creation process.
 ```bash
 $ php src/yii_test migrate/up
-$ src/vendor/bin/codecept/run
+$ ./vendor/bin/codecept run
 ```
 
 Running app in docker container:
@@ -19,8 +36,10 @@ Edit docker-compose.yml environment variables if needed.
 ```bash
 $ docker-compose up -d
 ```
+You can access the application on port 8080, if you have not changed the default
+docker environment variables. For example: http://localhost:8080/v1/organizations
 
-REST API INFORMATION
+REST API DOCUMENTATION
 ===
 
 **Insert organizations**
