@@ -1,0 +1,11 @@
+class_name: ApiTester
+modules:
+     enabled:
+        - Filesystem
+        - Yii2
+        - Asserts
+        - tests\_support\FixtureHelper:
+            depends: Yii2
+        - REST:
+            url: /v1
+            depends: Yii2

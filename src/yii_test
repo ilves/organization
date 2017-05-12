@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+
+<?php
+for($i=1;$i<count($argv);$i++){
+     putenv($argv[$i]);
+}
+
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_ENV') or define('YII_ENV', 'dev');
+
+require(__DIR__ . '/vendor/autoload.php');
+require(__DIR__ . '/vendor/yiisoft/yii2/Yii.php');
+
+$config = require(__DIR__ . '/config/console-test.php');
+$application = new yii\console\Application($config);
+
+exit($application->run());

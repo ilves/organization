@@ -1,0 +1,27 @@
+version: '2'
+services:
+  mysql:
+    image: 'mysql:5.7'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pipedrive
+      MYSQL_USER: pipedrive
+      MYSQL_PASSWORD: pipedrive
+    ports:
+      - '3301:3306'
+    command: --innodb_buffer_pool_size=1G --sort-buffer-size=500M
+  php:
+    build: ./
+    ports:
+      - '8080:80'
+    depends_on:
+      - mysql
+    environment:
+      VENDOR_PATH: /vendor
+      DB_HOST: mysql
+      DB_USER: pipedrive
+      DB_PASSWORD: pipedrive
+      DB_DATABASE: pipedrive
+    volumes:
+      - ./src:/var/www
+      - ./vendor:/vendor
