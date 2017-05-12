@@ -104,8 +104,9 @@ class OrganizationController extends Controller
     public function actionClear()
     {
         Yii::$app->db->createCommand()->truncateTable(Relation::tableName())->execute();
+        Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=0')->execute();
         Yii::$app->db->createCommand()->truncateTable(Organization::tableName())->execute();
-
+        Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=1')->execute();
         return ['data' => null];
     }
 
