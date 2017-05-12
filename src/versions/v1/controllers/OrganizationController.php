@@ -11,7 +11,9 @@ use app\versions\v1\models\OrganizationRelationship;
 use app\versions\v1\Module;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\rest\Controller;
+use yii\web\Response;
 
 /**
  * OrganizationController implements organization related rest actions
@@ -26,6 +28,21 @@ class OrganizationController extends Controller
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'data',
     ];
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return ArrayHelper::merge(parent::behaviors(), [
+            [
+                'class' => 'yii\filters\ContentNegotiator',
+                'formats' => [
+                    'application/json' => Response::FORMAT_JSON,
+                ],
+            ],
+        ]);
+    }
 
     /**
      * @inheritdoc
@@ -107,6 +124,7 @@ class OrganizationController extends Controller
         Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=0')->execute();
         Yii::$app->db->createCommand()->truncateTable(Organization::tableName())->execute();
         Yii::$app->db->createCommand('SET FOREIGN_KEY_CHECKS=1')->execute();
+
         return ['data' => null];
     }
 
