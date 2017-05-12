@@ -5,11 +5,16 @@ for($i=1;$i<count($argv);$i++){
      putenv($argv[$i]);
 }
 
+$defaultVendorPath = __DIR__ . '/../vendor';
+
+defined('VENDOR_PATH') or define('VENDOR_PATH', getenv('VENDOR_PATH')?:$defaultVendorPath);
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 
-require(__DIR__ . '/vendor/autoload.php');
-require(__DIR__ . '/vendor/yiisoft/yii2/Yii.php');
+/** @noinspection PhpIncludeInspection */
+require(VENDOR_PATH . '/autoload.php');
+/** @noinspection PhpIncludeInspection */
+require(VENDOR_PATH . '/yiisoft/yii2/Yii.php');
 
 $config = require(__DIR__ . '/config/console.php');
 $application = new yii\console\Application($config);
