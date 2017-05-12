@@ -48,7 +48,7 @@ Creates organizations and their relations from array of organization names and t
 * **URL** /v1/organizations
 * **Method:** `POST`
 * **URL Params** None
-* **Data Params**  `{ org_name : [string], daughters : [array] }`
+* **Data Params**  `{ org_name : [string], daughters : [ { org_name : [string], daughters : [array] } ] }`
 * **Success Response:**
   * **Code:** 200 <br />
     **Content:** `{ data : null }`
@@ -71,6 +71,17 @@ Returns child, parent and daughter relationships for provided organization
 * **Error Response:**
   * **Code:** 404 NOT FOUND <br />
     - **Content:** `{ error : {message : "Organization with name: $name not found" } }`
+
+**Get all organizations**
+----
+Returns all organizations
+* **URL** /v1/organizations
+* **Method:** `GET`
+* **URL Params** None
+* **Data Params** None
+* **Success Response:**
+  * **Code:** 200 <br />
+    - **Content:** `{ data : [ { id : [integer], org_name : [string] } ] }`
 
 **Delete organizations**
 ----
